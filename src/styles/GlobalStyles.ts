@@ -1,23 +1,19 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
-const GlobalStyle = createGlobalStyle`
+export const GlobalStyles = createGlobalStyle`
   * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
   }
 
   body {
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #f5f5f5;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f7f7f7;
     color: #333;
   }
 
-  @media (max-width: 600px) {
-    body {
-      font-size: 16px;
-    }
+  input, button {
+    font-family: inherit;
   }
 `;
-
-export default GlobalStyle;
