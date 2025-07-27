@@ -1,50 +1,18 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+// src/components/TodoInput.tsx
+import React, { useState } from 'react';
+import { InputWrapper, Input, Button } from '../styles/TodoInput';
 
 type TodoInputProps = {
   onAdd: (text: string) => void;
 };
 
-const InputWrapper = styled.div`
-  display: flex;
-  margin-bottom: 20px;
-`;
-
-const Input = styled.input`
-  flex: 1;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px 0 0 4px;
-
-  @media (max-width: 600px) {
-    padding: 8px;
-  }
-`;
-
-const Button = styled.button`
-  padding: 10px 20px;
-  background-color: #4cafef;
-  color: white;
-  border: none;
-  border-radius: 0 4px 4px 0;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #3ca0d9;
-  }
-
-  @media (max-width: 600px) {
-    padding: 8px 16px;
-  }
-`;
-
 const TodoInput: React.FC<TodoInputProps> = ({ onAdd }) => {
-  const [text, setText] = useState("");
+  const [text, setText] = useState('');
 
   const handleAdd = () => {
-    if (text.trim() !== "") {
+    if (text.trim()) {
       onAdd(text);
-      setText("");
+      setText('');
     }
   };
 
@@ -52,9 +20,9 @@ const TodoInput: React.FC<TodoInputProps> = ({ onAdd }) => {
     <InputWrapper>
       <Input
         type="text"
+        placeholder="Введите задачу..."
         value={text}
         onChange={(e) => setText(e.target.value)}
-        placeholder="Введите задачу..."
       />
       <Button onClick={handleAdd}>Добавить</Button>
     </InputWrapper>
@@ -62,5 +30,3 @@ const TodoInput: React.FC<TodoInputProps> = ({ onAdd }) => {
 };
 
 export default TodoInput;
-
-export {}

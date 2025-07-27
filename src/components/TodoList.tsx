@@ -1,19 +1,71 @@
 // src/components/TodoList.tsx
+import React, { useState, useEffect } from 'react';
+import { ListItem, DeleteButton, EditButton, TaskInput } from '../styles/TodoList';
+import TodoInput from './TodoInput';
 
-import React from 'react';
-import { ListItem, DeleteButton } from '../styles/TodoList';
+const TodoList: React.FC = () => {
+  const [todos, setTodos] = useState<string[]>([]);
+  const [editingIndex, setEditingIndex] = useState<number | null>(null);
+  const [editedText, setEditedText] = useState('');
 
-const TodoList = () => {
-  const handleDelete = () => {
-    console.log('Удаление задачи'); // В будущем будет удаление по id
+  useEffect(() => {
+    const saved = localStorage.getItem('todos');
+    if (saved) {
+      setTodos(JSON.parse(saved));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
+
+  const handleDelete = (index: number) => {
+    const updated = todos.filter((_, i) => i !== index);
+    setTodos(updated);
+  };
+
+  const handleEdit = (index: number) => {
+    setEditingIndex(index);
+    setEditedText(todos[index]);
+  };
+
+  const handleSave = (index: number) => {
+    const updated = [...todos];
+    updated[index] = editedText;
+    setTodos(updated);
+    setEditingIndex(null);
+  };
+
+  const handleAdd = (text: string) => {
+    setTodos([...todos, text]);
   };
 
   return (
-    <ListItem>
-      <span>Текст задачи</span>
-      <DeleteButton onClick={handleDelete}>УДАЛИТЬ</DeleteButton>
-    </ListItem>
+    <>
+      <TodoInput onAdd={handleAdd} />
+      {todos.map((todo, index) => (
+        <ListItem key={index}>
+          {editingIndex === index ? (
+            <>
+              <TaskInput
+                type="text"
+                value={editedText}
+                onChange={(e) => setEditedText(e.target.value)}
+              />
+              <EditButton onClick={() => handleSave(index)}>Сохранить</EditButton>
+            </>
+          ) : (
+            <>
+              <span>{todo}</span>
+              <EditButton onClick={() => handleEdit(index)}>Редактировать</EditButton>
+            </>
+          )}
+          <DeleteButton onClick={() => handleDelete(index)}>Удалить</DeleteButton>
+        </ListItem>
+      ))}
+    </>
   );
 };
 
 export default TodoList;
+
