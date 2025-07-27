@@ -1,28 +1,35 @@
+// src/styles/TodoInput.ts
 import styled from 'styled-components';
 
-export const Form = styled.form`
+export const InputWrapper = styled.div`
   display: flex;
-  gap: 10px;
   margin-bottom: 20px;
-  justify-content: center;
-  flex-wrap: wrap;
 `;
 
 export const Input = styled.input`
+  flex: 1;
   padding: 10px;
-  width: 250px;
-  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px 0 0 4px;
+
+  @media (max-width: 600px) {
+    padding: 8px;
+  }
 `;
 
 export const Button = styled.button`
-  padding: 10px 15px;
-  font-size: 16px;
+  padding: 10px 20px;
   background-color: #4cafe1;
   color: white;
   border: none;
+  border-radius: 0 4px 4px 0;
   cursor: pointer;
 
   &:hover {
-    background-color: #3a9ad9;
+    background-color: #3ca0d9;
+  }
+
+  @media (max-width: 600px) {
+    padding: 8px 16px;
   }
 `;

@@ -1,27 +1,39 @@
+// src/styles/TodoList.ts
 import styled from 'styled-components';
 
-export const List = styled.ul`
-  list-style: none;
-  padding: 0;
-`;
-
-export const ListItem = styled.li`
-  margin-bottom: 10px;
+export const ListItem = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 10px 15px;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 8px;
   background-color: #f5f5f5;
   border-radius: 4px;
 `;
 
 export const DeleteButton = styled.button`
-  background: red;
+  background-color: red;
   color: white;
   border: none;
-  padding: 5px 8px;
+  padding: 5px 10px;
+  margin-left: 8px;
   cursor: pointer;
+  border-radius: 4px;
+`;
 
-  &:hover {
-    background-color: darkred;
-  }
+export const EditButton = styled.button`
+  background-color: orange;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-left: 8px;
+  cursor: pointer;
+  border-radius: 4px;
+`;
+
+export const TaskInput = styled.input`
+  padding: 5px;
+  flex: 1;
+  margin-right: 10px;
+  font-size: 16px;
 `;
