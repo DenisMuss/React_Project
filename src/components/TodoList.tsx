@@ -1,9 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import { Todo } from '../store/todosSlice';
 
 type TodoListProps = {
-  todos: string[];
-  onDelete: (index: number) => void;
+  todos: Todo[];
+  onDelete: (id: string) => void;
+  onToggle: (id: string) => void;
+  onEdit: (id: string, text: string) => void;
 };
 
 const List = styled.ul`
@@ -45,11 +48,11 @@ const DeleteButton = styled.button`
 const TodoList: React.FC<TodoListProps> = ({ todos, onDelete }) => (
   <List>
     {todos.map((todo, index) => (
-      <ListItem key={index}>
-        {todo}
-        <DeleteButton onClick={() => onDelete(index)}>Удалить</DeleteButton>
-      </ListItem>
-    ))}
+  <ListItem key={todo.id}>
+    {todo.text}
+    <DeleteButton onClick={() => onDelete(todo.id)}>Удалить</DeleteButton>
+  </ListItem>
+))}
   </List>
 );
 
