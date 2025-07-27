@@ -1,61 +1,19 @@
-import React from "react";
-import styled from "styled-components";
-import { Todo } from '../store/todosSlice';
+// src/components/TodoList.tsx
 
-type TodoListProps = {
-  todos: Todo[];
-  onDelete: (id: string) => void;
-  onToggle: (id: string) => void;
-  onEdit: (id: string, text: string) => void;
+import React from 'react';
+import { ListItem, DeleteButton } from '../styles/TodoList';
+
+const TodoList = () => {
+  const handleDelete = () => {
+    console.log('Удаление задачи'); // В будущем будет удаление по id
+  };
+
+  return (
+    <ListItem>
+      <span>Текст задачи</span>
+      <DeleteButton onClick={handleDelete}>УДАЛИТЬ</DeleteButton>
+    </ListItem>
+  );
 };
 
-const List = styled.ul`
-  list-style: none;
-  padding: 0;
-`;
-
-const ListItem = styled.li`
-  background-color: white;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 4px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  @media (max-width: 600px) {
-    padding: 8px;
-  }
-`;
-
-const DeleteButton = styled.button`
-  background-color: #ff4d4f;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 4px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #d9363e;
-  }
-
-  @media (max-width: 600px) {
-    padding: 4px 8px;
-  }
-`;
-
-const TodoList: React.FC<TodoListProps> = ({ todos, onDelete }) => (
-  <List>
-    {todos.map((todo, index) => (
-  <ListItem key={todo.id}>
-    {todo.text}
-    <DeleteButton onClick={() => onDelete(todo.id)}>Удалить</DeleteButton>
-  </ListItem>
-))}
-  </List>
-);
-
 export default TodoList;
-
-export {}
